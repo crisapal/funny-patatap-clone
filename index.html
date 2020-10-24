@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+    <head>
+  <link href="https://fonts.googleapis.com/css2?family=Khula:wght@700&display=swap" rel="stylesheet">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js">
+    </script>
+ 
+        <title>Circles</title>
+        <script type="text/javascript" src="paper-full.js"></script>
+        <script type="text/javascript" src="howler.js"></script>
+
+        <script type="text/paperscript" canvas="myCanvas">
+            var circles = [];
+            var creativeData = {
+                a:{
+                color: "purple",
+                sound: new Howl({
+                        src: ['sounds/bubbles.mp3']
+                      })
+                },
+                b:{ 
+                color: "pink",
+                sound: new Howl({
+                        src: ['sounds/clay.mp3']
+                          })
+                },
+                c:{
+                    color: "orange",
+                    sound: new Howl({
+                            src: ['sounds/confetti.mp3']
+                          })
+                },
+                d:{
+                    color: "red",
+                    sound: new Howl({
+                            src: ['sounds/corona.mp3']
+                          })
+                },
+                e:{
+                    color: "green",
+                    sound: new Howl({
+                            src: ['sounds/dotted-spiral.mp3']
+                          })
+                },
+                f:{
+                    color: "blue",
+                    sound: new Howl({
+                            src: ['sounds/flash-1.mp3']
+                          })
+                },
+                g:{
+                    color: "white",
+                    sound: new Howl({
+                            src: ['sounds/flash-2.mp3']
+                          })
+                },
+                h:{
+                    color: "#33ccff",                
+                    sound: new Howl({
+                            src: ['sounds/glimmer.mp3']
+                          })
+                },
+                i:{
+                    color: "#99e600",       
+                    sound: new Howl({
+                            src: ['sounds/moon.mp3']
+                          })
+                },
+                i:{
+                  color: "#327fa8",       
+                  sound: new Howl({
+                          src: ['sounds/pinwheel.mp3']
+                        })
+              },
+              j:{
+                color: "#3c32a8",       
+                sound: new Howl({
+                        src: ['sounds/flash.mp3']
+                      })
+            },
+            k:{
+              color: "#a8326b",       
+              sound: new Howl({
+                      src: ['sounds/timer.mp3']
+                    })
+          },
+          l:{
+            color: "#a83232",       
+            sound: new Howl({
+                    src: ['sounds/moon.mp3']
+                  })
+        },
+        m:{
+          color: "#e8e413",       
+          sound: new Howl({
+                  src: ['sounds/piston-3.mp3']
+                })
+      },  n:{
+        color: "#13e836",       
+        sound: new Howl({
+                src: ['sounds/piston-2.mp3']
+              })
+    },  o:{
+      color: "#13e8b6",       
+      sound: new Howl({
+              src: ['sounds/piston-1.mp3']
+            })
+  },  p:{
+    color: "#99e600",       
+    sound: new Howl({
+            src: ['sounds/prism-1.mp3']
+          })
+},  q:{
+  color: "#e88813",       
+  sound: new Howl({
+          src: ['sounds/prism-2.mp3']
+        })
+},
+r:{
+  color: "#191640",       
+  sound: new Howl({
+          src: ['sounds/prism-3.mp3']
+        })
+},
+s:{
+  color: "#99e600",       
+  sound: new Howl({
+          src: ['sounds/splits.mp3']
+        })
+},
+t:{
+  color: "#26269e",       
+  sound: new Howl({
+          src: ['sounds/strike.mp3']
+        })
+},
+u:{
+  color: "#99e600",       
+  sound: new Howl({
+          src: ['sounds/suspension.mp3']
+        })
+},
+v:{
+  color: "#a1849d",       
+  sound: new Howl({
+          src: ['sounds/timer.mp3']
+        })
+},
+w:{
+  color: "#271a4d",       
+  sound: new Howl({
+          src: ['sounds/ufo.mp3']
+        })
+},
+x:{
+  color: "#b59b7b",       
+  sound: new Howl({
+          src: ['sounds/veil.mp3']
+        })
+},
+y:{
+  color: "#e88813",       
+  sound: new Howl({
+          src: ['sounds/wipe.mp3']
+        })
+},
+z:{
+  color: "#39e600",       
+  sound: new Howl({
+          src: ['sounds/zig-zag.mp3']
+        })
+}
+            
+  } 
+
+            function onKeyDown(event) {
+                var maxPoint = new Point(view.size.width, view.size.height ); 
+                var randomPoint = Point.random();
+                var randomCenter = maxPoint *randomPoint; /// related to my viewport
+                var newCircle = new Path.Circle(randomCenter, 500);
+            
+                if(creativeData[event.key]){
+                 //max size of the page in order to generate a random center of my circle
+                newCircle.fillColor = creativeData[event.key].color; //take care with 
+                creativeData[event.key].sound.play();
+                circles.push(newCircle);
+
+              }
+        }  
+
+ 
+            function onFrame(event){
+                for(var i=0;i<circles.length;i++){
+                    circles[i].scale(.9);
+                    circles[i].fillColor.hue += 1;
+                    if(circles[i].area < 1){
+                        circles[i].remove();
+                      circles.splice(i, 1);            
+                    }
+                }
+            }
+
+         
+        </script>
+    </head>
+    <body>
+       <section >
+         <div class="galaxy">
+            <div class="stars"></div>
+         </div>
+                <canvas id="myCanvas" resize></canvas>
+              
+
+    </section>
+  <div class='console-container'><span id='text'></span><div class='console-underscore' id='console'>&#95;</div></div>
+
+<script type="text/javascript" src="useless.js"></script>
+
+    </body>
+</html>
